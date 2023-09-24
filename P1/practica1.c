@@ -1,7 +1,7 @@
 #include "header.h"
 unsigned char main(){
 //declaramos la IP y la MR para almacenar
-unsigned char IP[4] ={10,250,1,1}, MR[4] ={255,0,0,0};
+unsigned char IP[4] ={150,10,255,255}, MR[4] ={255,255,0,0};
 //declaramos la variable de clase
 unsigned char clase;
 //declaramos la IP de red y de Broadcast
