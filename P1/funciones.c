@@ -41,44 +41,9 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
         }
         }
         //Si hay 24 bits encendidos es una IP de broadcast
-        if(bits == 24){
-            tipoIP[0]='B';
-            tipoIP[1]='r';
-            tipoIP[2]='o';
-            tipoIP[3]='a';
-            tipoIP[4]='d';
-            tipoIP[5]='c';
-            tipoIP[6]='a';
-            tipoIP[7]='s';
-            tipoIP[8]='t';
+        //¿Qué vemos en comun? que solamente son broadcast si los bits encendidos son 24,16 o 8 y si es 0 en cualquiera es una IP de red
 
-        }else if(bits == 0){
-            //si no hay bits encendidos es una IP de red
-            tipoIP[0]='R';
-            tipoIP[1]='e';
-            tipoIP[2]='d';
-            tipoIP[3]=' ';
-            tipoIP[4]=' ';
-            tipoIP[5]=' ';
-            tipoIP[6]=' ';
-            tipoIP[7]=' ';
-            tipoIP[8]=' ';
-
-
-           
-        }else{
-            //si no es ninguna de las anteriores es una IP de host
-            tipoIP[0]='H';
-            tipoIP[1]='o';
-            tipoIP[2]='s';
-            tipoIP[3]='t';
-            tipoIP[4]=' ';
-            tipoIP[5]=' ';
-            tipoIP[6]=' ';
-            tipoIP[7]=' ';
-            tipoIP[8]=' ';
-
-        }
+        funElection(bits, tipoIP);
             
             break;
         case 'B':
@@ -91,41 +56,7 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
             currentByte = currentByte >> 1;
         }
         }
-        //Si hay 16 bits encendidos es una IP de broadcast
-        if(bits == 16){
-            tipoIP[0]='B';
-            tipoIP[1]='r';
-            tipoIP[2]='o';
-            tipoIP[3]='a';
-            tipoIP[4]='d';
-            tipoIP[5]='c';
-            tipoIP[6]='a';
-            tipoIP[7]='s';
-            tipoIP[8]='t';
-         } else if(bits == 0){
-            //si no hay bits encendidos es una IP de red
-            tipoIP[0]='R';
-            tipoIP[1]='e';
-            tipoIP[2]='d';
-            tipoIP[3]=' ';
-            tipoIP[4]=' ';
-            tipoIP[5]=' ';
-            tipoIP[6]=' ';
-            tipoIP[7]=' ';
-            tipoIP[8]=' ';
-         }else{
-            //si no es ninguna de las anteriores es una IP de host
-            tipoIP[0]='H';
-            tipoIP[1]='o';
-            tipoIP[2]='s';
-            tipoIP[3]='t';
-            tipoIP[4]=' ';
-            tipoIP[5]=' ';
-            tipoIP[6]=' ';
-            tipoIP[7]=' ';
-            tipoIP[8]=' ';
-         }
-
+          funElection(bits, tipoIP);
 
             
             break;
@@ -139,8 +70,16 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
             currentByte = currentByte >> 1;
         }
         }
-        //Si hay 8 bits encendidos es una IP de broadcast
-        if(bits == 8){
+          funElection(bits, tipoIP);
+          //ya quedo con eso mira
+            
+        break;        
+    }
+}
+
+void funElection(unsigned char bits,unsigned char *tipoIP){
+//Aquí ponemos un if con las opciones posibles, no nos importa ya que clase tenga
+if(bits == 24 /*Clase A*/ || bits == 16 /*Clase B*/ || bits == 8 /*Clase C*/){
             tipoIP[0]='B';
             tipoIP[1]='r';
             tipoIP[2]='o';
@@ -150,8 +89,8 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
             tipoIP[6]='a';
             tipoIP[7]='s';
             tipoIP[8]='t';
-        }else if(bits == 0){
-            //si no hay bits encendidos es una IP de red
+}else if(bits == 0){
+ //si no hay bits encendidos es una IP de red
             tipoIP[0]='R';
             tipoIP[1]='e';
             tipoIP[2]='d';
@@ -161,8 +100,8 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
             tipoIP[6]=' ';
             tipoIP[7]=' ';
             tipoIP[8]=' ';
-        }else{
-            //si no es ninguna de las anteriores es una IP de host
+}else{
+     //si no es ninguna de las anteriores es una IP de host
             tipoIP[0]='H';
             tipoIP[1]='o';
             tipoIP[2]='s';
@@ -172,13 +111,9 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
             tipoIP[6]=' ';
             tipoIP[7]=' ';
             tipoIP[8]=' ';
-        }
-            
-        break;        
-    }
 }
 
-
+}
 
 void funRed(unsigned char IP[4], unsigned char MR[4], unsigned char IPred[4]){
     
