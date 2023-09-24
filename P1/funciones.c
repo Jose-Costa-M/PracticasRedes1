@@ -37,12 +37,13 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
            for (int j = 0; j < 8; j++) {
             if (currentByte & 1)
                 bits++;
+                else 
+               break;
             currentByte = currentByte >> 1;
         }
         }
         //Si hay 24 bits encendidos es una IP de broadcast
         //¿Qué vemos en comun? que solamente son broadcast si los bits encendidos son 24,16 o 8 y si es 0 en cualquiera es una IP de red
-
         funElection(bits, tipoIP);
             
             break;
@@ -53,10 +54,13 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
            for (int j = 0; j < 8; j++) {
             if (currentByte & 1)
                 bits++;
+            else 
+               break;
             currentByte = currentByte >> 1;
         }
+        funElection(bits, tipoIP);
         }
-          funElection(bits, tipoIP);
+          
 
             
             break;
@@ -67,10 +71,13 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
            for (int j = 0; j < 8; j++) {
             if (currentByte & 1)
                 bits++;
+                else 
+               break;
             currentByte = currentByte >> 1;
         }
+         funElection(bits, tipoIP);
         }
-          funElection(bits, tipoIP);
+         
           //ya quedo con eso mira
             
         break;        
@@ -79,7 +86,7 @@ void funTipoIP(unsigned char *IP, unsigned char *tipoIP, unsigned char clase){
 
 void funElection(unsigned char bits,unsigned char *tipoIP){
 //Aquí ponemos un if con las opciones posibles, no nos importa ya que clase tenga
-if(bits == 24 /*Clase A*/ || bits == 16 /*Clase B*/ || bits == 8 /*Clase C*/){
+if(bits == 24 /*Clase A*/ || bits == 16 /*Clase B*/ || bits == 8 /*Clase*/){
             tipoIP[0]='B';
             tipoIP[1]='r';
             tipoIP[2]='o';
